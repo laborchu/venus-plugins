@@ -55,20 +55,21 @@ Plugin.prototype.getAndroidResId = function(config,resId){
 	}
     
 };
-Plugin.loadPlugin = function(){
-    let plugins = {
-        "path":{},
-        "checker":{},
-    };
+
+let plugins = {
+    "path":{},
+    "checker":{},
+};
+let _loadPlugin = function(pluginPath){
     for(let cat of Object.keys(plugins)){
-        var pluginFolder = path.join(__dirname, cat);
+        var pluginFolder = path.join(pluginPath, cat);
         var pluginFiles = fs.readdirSync(pluginFolder);
         for(let filename of pluginFiles){
             var filePath = path.join(pluginFolder, filename);
             if (fs.lstatSync(filePath).isDirectory()) {
-                var pluginPath = path.join(filePath, "index.js");
-                if (fs.existsSync(pluginPath)) {
-                    var Plugin = require(pluginPath);
+                var pluginFile = path.join(filePath, "index.js");
+                if (fs.existsSync(pluginFile)) {
+                    var Plugin = require(pluginFile);
                     var plugin = new Plugin();
                     plugin.init(filename,pluginFolder);
                     plugins[cat][filename] = plugin;
@@ -76,6 +77,11 @@ Plugin.loadPlugin = function(){
             }
         }
     }
+};
+
+Plugin.loadPlugin = function(selfPluginPath){
+    _loadPlugin(__dirname);
+    _loadPlugin(path.join(selfPluginPath,"plugins"));
     return plugins;
 };
 Plugin.extend = require('class-extend').extend;
