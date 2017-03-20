@@ -1,0 +1,1 @@
+.elementsByClassName("<%= className %>").then(elements=>elements[<%=index-1%>].touch('tap'))

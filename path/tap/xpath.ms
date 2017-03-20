@@ -1,0 +1,1 @@
+.elementByXPathOrNull("<%= xpath %>").touch('tap')

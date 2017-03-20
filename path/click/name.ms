@@ -1,0 +1,1 @@
+.elementByName("<%= name %>").click()
