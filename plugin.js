@@ -81,7 +81,9 @@ let _loadPlugin = function(pluginPath){
 
 Plugin.loadPlugin = function(selfPluginPath){
     _loadPlugin(__dirname);
-    _loadPlugin(path.join(selfPluginPath,"plugins"));
+    if(selfPluginPath){
+        _loadPlugin(path.join(selfPluginPath,"plugins"));
+    }
     return plugins;
 };
 Plugin.extend = require('class-extend').extend;
