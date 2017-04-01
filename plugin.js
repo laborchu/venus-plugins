@@ -59,6 +59,7 @@ Plugin.prototype.getAndroidResId = function(config,resId){
 let plugins = {
     "path":{},
     "checker":{},
+    "method":{},
 };
 let _loadPlugin = function(pluginPath){
     for(let cat of Object.keys(plugins)){
