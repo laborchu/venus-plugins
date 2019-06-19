@@ -35,7 +35,7 @@ Plugin.prototype.build = function(config){
     /********load template start********/
     var compiled = _.template(tempContent);
     if(config.vtestConfig.platform==="android"){
-    	config.context = config.context || 'navite';
+        config.context = config.context || config.vtestConfig.context || 'navite';
     }
     return compiled(this.buildParams(config));
 };
